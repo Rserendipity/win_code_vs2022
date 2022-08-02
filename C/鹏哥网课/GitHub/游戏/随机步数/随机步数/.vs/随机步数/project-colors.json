@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "a39a6ca7-33dd-4af0-a47c-6697bfa524f1": {
+      "ProjectGuid": "a39a6ca7-33dd-4af0-a47c-6697bfa524f1",
+      "DisplayName": "随机步数",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}

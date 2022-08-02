@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "be62057d-5f68-4912-bce1-051406b74e66": {
+      "ProjectGuid": "be62057d-5f68-4912-bce1-051406b74e66",
+      "DisplayName": "变位词",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}

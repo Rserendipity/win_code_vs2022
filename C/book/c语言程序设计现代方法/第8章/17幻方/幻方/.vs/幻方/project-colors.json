@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "65a92a73-c44b-41e8-a498-f886c9ac5abd": {
+      "ProjectGuid": "65a92a73-c44b-41e8-a498-f886c9ac5abd",
+      "DisplayName": "幻方",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}

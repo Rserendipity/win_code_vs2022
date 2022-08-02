@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "b30082cc-1966-4e3e-8610-268b2c01f2fe": {
+      "ProjectGuid": "b30082cc-1966-4e3e-8610-268b2c01f2fe",
+      "DisplayName": "颠倒单词顺序",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}

@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "06311fc0-72bf-4839-8eb3-1580b5464dec": {
+      "ProjectGuid": "06311fc0-72bf-4839-8eb3-1580b5464dec",
+      "DisplayName": "AVL树",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
