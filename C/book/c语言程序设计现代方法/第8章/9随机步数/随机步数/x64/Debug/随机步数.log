@@ -1,0 +1,6 @@
+﻿  main.c
+C:\Users\昌晶晶\source\repos\C\鹏哥网课\GitHub\游戏\随机步数\随机步数\main.c(22,10): warning C4047: “函数”:“char **”与“char [8][8]”的间接级别不同
+C:\Users\昌晶晶\source\repos\C\鹏哥网课\GitHub\游戏\随机步数\随机步数\main.c(22,7): warning C4024: “Init”: 形参和实参 1 的类型不同
+C:\Users\昌晶晶\source\repos\C\鹏哥网课\GitHub\游戏\随机步数\随机步数\main.c(24,14): warning C4047: “函数”:“char **”与“char [8][8]”的间接级别不同
+C:\Users\昌晶晶\source\repos\C\鹏哥网课\GitHub\游戏\随机步数\随机步数\main.c(24,11): warning C4024: “PrintArr”: 形参和实参 1 的类型不同
+  随机步数.vcxproj -> C:\Users\昌晶晶\source\repos\C\鹏哥网课\GitHub\游戏\随机步数\随机步数\x64\Debug\随机步数.exe
