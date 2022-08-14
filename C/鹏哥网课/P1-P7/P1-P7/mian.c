@@ -1,6 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS 1
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>
 
 int main()
 {
@@ -13,7 +12,7 @@ int main()
 	}
 
 	printf("%s", arr);
-	
+
 	return 0;
 }
 
