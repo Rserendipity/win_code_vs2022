@@ -37,6 +37,5 @@ int main()
             break;
         printf("%d ", arr[i]);
     }
-
     return 0;
 }
