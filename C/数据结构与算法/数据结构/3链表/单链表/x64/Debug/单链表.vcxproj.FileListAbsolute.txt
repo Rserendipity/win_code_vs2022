@@ -1,2 +1,0 @@
-C:\Users\昌晶晶\source\repos\c\数据结构与算法\链表\单链表\x64\Debug\单链表.exe
-C:\Users\昌晶晶\source\repos\C\数据结构与算法\3链表\单链表\x64\Debug\链表.exe
