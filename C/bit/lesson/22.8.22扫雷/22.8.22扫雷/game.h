@@ -12,7 +12,7 @@
 #define COLS COL+2
 
 
-#define EASY_COUNT 3
+#define EASY_COUNT 10
 
 //≥ı ºªØ∆Â≈Ã
 void init_board(char board[ROWS][COLS], int rows, int cols, char set);
