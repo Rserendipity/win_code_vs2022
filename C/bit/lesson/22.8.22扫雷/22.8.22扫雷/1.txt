@@ -1,0 +1,195 @@
+void find(char mine[ROWS][COLS], char show[ROWS][COLS], int row, int col, int x, int y, int* win)
+{
+	//坐标合法 x,y
+	if (x >= 1 && x <= row && y >= 1 && y <= col)
+	{
+		// 该点坐标是雷
+		if (mine[x][y] == '1')
+			;
+		// 没有被排查过 
+		else if (show[x][y] == '*')
+		{
+			int ret = get_mine_count(mine, x, y);
+			if (ret == 0)
+			{
+				show[x][y] = ' ';
+				find(mine, show, row, col, x, y, win);
+			}
+			else
+				show[x][y] = ret + '0';
+
+			*win += 1;
+		}
+	}
+
+	//坐标合法 x,y-1
+	if (x >= 1 && x <= row && y - 1 >= 1 && y - 1 <= col)
+	{
+		// 该点坐标是雷
+		if (mine[x][y - 1] == '1')
+			;
+		// 没有被排查过 
+		else if (show[x][y - 1] == '*')
+		{
+			int ret = get_mine_count(mine, x, y - 1);
+			if (ret == 0)
+			{
+				find(mine, show, row, col, x, y - 1, win);
+				show[x][y - 1] = ' ';
+			}
+			else
+				show[x][y - 1] = ret + '0';
+			*win += 1;
+		}
+	}
+
+	//坐标合法 x,y+1
+	if (x >= 1 && x <= row && y + 1 >= 1 && y + 1 <= col)
+	{
+		// 该点坐标是雷
+		if (mine[x][y + 1] == '1')
+			;
+		// 没有被排查过 
+		else if (show[x][y + 1] == '*')
+		{
+			int ret = get_mine_count(mine, x, y + 1);
+			if (ret == 0)
+			{
+				show[x][y + 1] = ' ';
+				find(mine, show, row, col, x, y + 1, win);
+			}
+			else
+				show[x][y + 1] = ret + '0';
+			*win += 1;
+		}
+	}
+
+
+	//坐标合法 x-1,y
+	if (x - 1 >= 1 && x - 1 <= row && y >= 1 && y <= col)
+	{
+		// 该点坐标是雷
+		if (mine[x - 1][y] == '1')
+			;
+		// 没有被排查过 
+		else if (show[x - 1][y] == '*')
+		{
+			int ret = get_mine_count(mine, x - 1, y);
+			if (ret == 0)
+			{
+				show[x - 1][y] = ' ';
+				find(mine, show, row, col, x - 1, y, win);
+			}
+			else
+				show[x - 1][y] = ret + '0';
+			*win += 1;
+		}
+	}
+
+	//坐标合法 x-1,y-1
+	if (x - 1 >= 1 && x - 1 <= row && y - 1 >= 1 && y - 1 <= col)
+	{
+		// 该点坐标是雷
+		if (mine[x - 1][y - 1] == '1')
+			;
+		// 没有被排查过 
+		else if (show[x - 1][y - 1] == '*')
+		{
+			int ret = get_mine_count(mine, x - 1, y - 1);
+			if (ret == 0)
+			{
+				show[x - 1][y - 1] = ' ';
+				find(mine, show, row, col, x - 1, y - 1, win);
+			}
+			else
+				show[x - 1][y - 1] = ret + '0';
+			*win += 1;
+		}
+	}
+
+	//坐标合法 x-1,y+1
+	if (x - 1 >= 1 && x - 1 <= row && y + 1 >= 1 && y + 1 <= col)
+	{
+		// 该点坐标是雷
+		if (mine[x - 1][y + 1] == '1')
+			;
+		// 没有被排查过 
+		else if (show[x - 1][y + 1] == '*')
+		{
+			int ret = get_mine_count(mine, x - 1, y + 1);
+			if (ret == 0)
+			{
+				show[x - 1][y + 1] = ' ';
+				find(mine, show, row, col, x - 1, y + 1, win);
+			}
+			else
+				show[x - 1][y + 1] = ret + '0';
+			*win += 1;
+		}
+	}
+
+
+	//坐标合法 x+1,y
+	if (x + 1 >= 1 && x + 1 <= row && y >= 1 && y <= col)
+	{
+		// 该点坐标是雷
+		if (mine[x + 1][y] == '1')
+			;
+		// 没有被排查过 
+		else if (show[x + 1][y] == '*')
+		{
+			int ret = get_mine_count(mine, x + 1, y);
+			if (ret == 0)
+			{
+				show[x + 1][y] = ' ';
+				find(mine, show, row, col, x + 1, y, win);
+			}
+			else
+				show[x + 1][y] = ret + '0';
+			*win += 1;
+		}
+	}
+
+	//坐标合法 x+1,y-1
+	if (x + 1 >= 1 && x + 1 <= row && y - 1 >= 1 && y - 1 <= col)
+	{
+		// 该点坐标是雷
+		if (mine[x + 1][y - 1] == '1')
+			;
+		// 没有被排查过 
+		else if (show[x + 1][y - 1] == '*')
+		{
+			int ret = get_mine_count(mine, x + 1, y - 1);
+			if (ret == 0)
+			{
+				show[x + 1][y - 1] = ' ';
+				find(mine, show, row, col, x + 1, y - 1, win);
+			}
+			else
+				show[x + 1][y - 1] = ret + '0';
+			*win += 1;
+		}
+	}
+
+	//坐标合法 x+1,y+1
+	if (x + 1 >= 1 && x + 1 <= row && y + 1 >= 1 && y + 1 <= col)
+	{
+		// 该点坐标是雷
+		if (mine[x + 1][y + 1] == '1')
+			;
+		// 没有被排查过 
+		else if (show[x + 1][y + 1] == '*')
+		{
+			int ret = get_mine_count(mine, x + 1, y + 1);
+			if (ret == 0)
+			{
+				show[x + 1][y + 1] = ' ';
+				find(mine, show, row, col, x + 1, y + 1, win);
+			}
+			else
+				show[x + 1][y + 1] = ret + '0';
+			*win += 1;
+		}
+	}
+
+}

@@ -40,7 +40,6 @@ public:
         cout << "age is: " << m_age << endl;
     }
 };
-
 // 人这个类
 void test1()
 {
@@ -52,6 +51,7 @@ void test1()
 
     lucy.showPeoson();
 }
+
 
 class Cul {
 public:
@@ -93,6 +93,16 @@ void test2()
         cout << "c1和c2相等" << endl;
     else
         cout << "c1和c2不相等" << endl;
+
+}
+
+
+class Cyc {
+    
+};
+//圆类
+void test3()
+{
 
 }
 
