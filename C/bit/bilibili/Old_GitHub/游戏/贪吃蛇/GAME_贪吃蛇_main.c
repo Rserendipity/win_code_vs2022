@@ -1,7 +1,7 @@
 #include<windows.h>
 #include<conio.h>
 #include<stdio.h>
-#define Width 45///可以宏定义地图大小
+#define Width 40///可以宏定义地图大小
 int main()
 {
 	srand((unsigned)malloc(1));//初始化随机数种子
