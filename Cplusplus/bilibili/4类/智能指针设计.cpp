@@ -50,9 +50,16 @@ public:
             p = NULL;
         }
     }
+
+    // 重载->运算符，以实现对象当成指针使用
     Person* operator->()
     {
         return this->p;
+    }
+    // 重载*运算符，和上面相似
+    Person& operator*()
+    {
+        return *(this->p);
     }
 };
 /// <summary>
@@ -77,6 +84,7 @@ void test1()
     // ptr.operator->()    ->   ShowInfo();
     ptr.operator->()->ShowInfo();
     ptr->ShowInfo();
+    (*ptr).ShowInfo();
 }
 
 int main() 
