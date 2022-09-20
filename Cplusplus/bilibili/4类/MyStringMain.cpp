@@ -11,7 +11,9 @@ void test1()
     s3 = s3 + "abcd";
     s3.ShowString();
     std::cout << s3 << std::endl;
-    std::cout << s3[-1];
+    std::cout << s3[-1] << std::endl;
+    s3[0] = 'A';
+    std::cout << s3 << std::endl;
 }
 
 int main() 
