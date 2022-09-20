@@ -5,6 +5,7 @@ public:
     for (auto &n : coins) {
       cnt += (n + 1) / 2;
     }
+
     return cnt;
   }
 };
