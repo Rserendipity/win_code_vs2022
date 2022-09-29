@@ -1,4 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+
 int removeElement(int* nums, int numsSize, int val) {
     int count = 0;
     int index = 0;
@@ -16,6 +18,8 @@ int removeElement(int* nums, int numsSize, int val) {
 }
 int main() 
 {
+    const int x = 10;
 
+    printf("%d", x);
     return 0;
 }
