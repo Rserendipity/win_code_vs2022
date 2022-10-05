@@ -98,11 +98,34 @@ void test2()
     cout << funcT4<int>(10, 20) << endl;//此处，第一个类型参数要指定，第二个，第三个，可以由编译器自动推导
 }
 
+/// <summary>
+/// 函数模板的调用时机
+/// </summary>
 void test3()
 {
     // 函数模板在编译期间确定，所以在编译到函数调用这里才会确定函数模板的具体类型
     funcT<int>(10, 20);       // 生成了一个int型的函数
     funcT<double>(10, 20.2);  // 生成了一个doubel型的函数
+}
+
+template <typename T>
+T add(T x, T y)
+{
+    cout << "函数模板" << endl;
+    return x + y;
+}
+int add(int x, int y)
+{
+    cout << "普通函数" << endl;
+    return x + y;
+}
+/// <summary>
+/// 函数模板与普通函数之间的重载
+/// </summary>
+void test4()
+{
+    cout << add(10, 20) << endl; // 默认调用的是普通的函数
+    cout << add<int>(10, 20) << endl; // 显式的指定了调用函数模板
 
 }
 
@@ -110,7 +133,7 @@ int main()
 {
     // test1();
     // test2();
-    test3();
-
+    // test3();
+    test4();
     return 0;
 }
