@@ -129,11 +129,41 @@ void test4()
 
 }
 
+
+
+
+//指定类型和值
+template<class T1, class T2 = int> // 这里表示的是类型参数的默认值
+void funcT1(T1 a, T2 b = 123) 
+{
+    // 这里表示的是函数中T2类型的参数的默认值
+    cout << a << endl;
+    cout << b << endl;
+}
+//指定类型
+template<class T1 = int, class T2>
+void funcT2(T2 b) 
+{
+    T1 a = b;
+    cout << b << "--" << a << endl;
+}
+
+/// <summary>
+/// 模板的默认类型以及参数
+/// </summary>
+void test5()
+{
+    funcT1<char>('a'); // t1 为char型， t2没有指定，所以默认给了int型
+    funcT2<>('a');
+
+}
+
 int main() 
 {
     // test1();
     // test2();
     // test3();
-    test4();
+    // test4();
+    test5();
     return 0;
 }
