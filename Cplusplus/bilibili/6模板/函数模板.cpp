@@ -154,7 +154,7 @@ void funcT2(T2 b)
 void test5()
 {
     funcT1<char>('a'); // t1 为char型， t2没有指定，所以默认给了int型
-    funcT2<>('a');
+    funcT2<>('a');     // t1 默认为int型， t2通过参数推导出来了，char型
 
 }
 
