@@ -130,8 +130,6 @@ void test4()
 }
 
 
-
-
 //指定类型和值
 template<class T1, class T2 = int> // 这里表示的是类型参数的默认值
 void funcT1(T1 a, T2 b = 123) 
