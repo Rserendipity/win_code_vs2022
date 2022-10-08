@@ -12,7 +12,8 @@ static void initBoard()
 
 void InitGame()
 {
-	
+	initBoard();
+
 }
 
 
