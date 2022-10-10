@@ -5,19 +5,17 @@ int myFun(int num, ...)
 {
     va_list arg;
     __crt_va_start(arg, num);
-    int max = __crt_va_arg(arg, int);
-    for (int i = 1; i < num; i++) 
+    for (int i = 0; i < num; i++) 
     {
-        int temp = __crt_va_arg(arg, int);
-        if (temp > max)
-            max = temp;
+        int max = __crt_va_arg(arg, int);
+        printf("%d ", max);
     }
     __crt_va_end(arg);
-    return max;
+    return 0;
 }
 
 int main() 
 {
-    printf("max = %d", myFun(6, 10, 20, 30, 40, 50, 100));
+    printf("max = %d", 4 < 5 < 3);
     return 0;
 }
