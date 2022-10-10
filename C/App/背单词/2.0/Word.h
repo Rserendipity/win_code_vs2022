@@ -24,7 +24,7 @@ private:
 	Word(const Word&); // 不允许拷贝构造
 	int current;
 	string* ch[4];
-	string* en; 
+	string* en;
 	int randArr[4];
 	fstream fin;
 
