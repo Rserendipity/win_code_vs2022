@@ -50,7 +50,7 @@ int main()
             word.JumpRecord();
             system("cls");
         }
-        else if (input.compare("5") == 0)
+        else if (input.compare("6") == 0)
         {
             return 0;
         }
