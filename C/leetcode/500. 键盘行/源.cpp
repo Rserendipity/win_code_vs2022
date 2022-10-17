@@ -29,6 +29,6 @@ public:
 };
 int main() 
 {
-
+    NULL
     return 0;
 }
