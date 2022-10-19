@@ -18,10 +18,8 @@ public:
                 count++;
             }
         }
-        strcat(temp, str + index);
-        for (int i = 0; temp[i] != '\0'; i++) {
-            str[i] = temp[i];
-        }
+        strcat(temp, str + index); // 追加最后的出现的空格的剩余字符串
+        strcpy(str, temp);
     }
 };
 int main() 
