@@ -1,9 +1,9 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include <bits/stdc++.h>
 using namespace std;
-// ½â·¨1
-//class Solution {
-//public:
+// è§£æ³•1
+// class Solution {
+// public:
 //    vector<string> commonChars(vector<string>& words) {
 //        vector<string> ans;
 //        int temp[26] = { 0 };
@@ -75,31 +75,31 @@ class Solution {
 public:
     vector<string> commonChars(vector<string>& words) {
         int sz = words.size();
-        int flag = 0; // ±ê¼ÇÓĞÃ»ÓĞÕÒµ½ÏàÍ¬µÄ×Ö·û
+        int flag = 0; // æ ‡è®°æœ‰æ²¡æœ‰æ‰¾åˆ°ç›¸åŒçš„å­—ç¬¦
         vector<string> ans;
-        // ´Ó a ~ z µÄÑ­»·
+        // ä» a ~ z çš„å¾ªç¯
         for (int i = 'a'; i <= 'z'; i++) {
             flag = 0;
 
-            // Èç¹û¶¼ÄÜÕÒµ½ÏàÍ¬µÄ×Ö·û£¬flag²»»á±»¸Ä
+            // å¦‚æœéƒ½èƒ½æ‰¾åˆ°ç›¸åŒçš„å­—ç¬¦ï¼Œflagä¸ä¼šè¢«æ”¹
             for (int j = 0; j < sz; j++) {
                 if (words[j].find(i) == words[j].npos) {
                     flag = 1;
-                    break; // ÕÒµ½Ò»¸ö×Ö·û´®ÄÚ²»´æÔÚÏàÍ¬µÄ×Ö·ûÔòÖ±½ÓÍË³öÑ­»·
+                    break; // æ‰¾åˆ°ä¸€ä¸ªå­—ç¬¦ä¸²å†…ä¸å­˜åœ¨ç›¸åŒçš„å­—ç¬¦åˆ™ç›´æ¥é€€å‡ºå¾ªç¯
                 }
             }
 
             if (flag == 1) {
-                // ÓĞÒ»¸ö×Ö·û´®Ã»ÓĞÕÒµ½µ±Ç° i ×Ö·û£¬É¶Ò²²»×ö£¬ÈÃi++ÕÒÏÂÒ»¸ö
+                // æœ‰ä¸€ä¸ªå­—ç¬¦ä¸²æ²¡æœ‰æ‰¾åˆ°å½“å‰ i å­—ç¬¦ï¼Œå•¥ä¹Ÿä¸åšï¼Œè®©i++æ‰¾ä¸‹ä¸€ä¸ª
             }
             else {
-                // ËùÓĞ×Ö·û´®ÄÚÕÒµ½ÁËÏàÍ¬µÄ×Ö·û£¬Ôò¼ÓÈëµ½ansÈİÆ÷
-                // É¾³ıËùÓĞ×Ö·û´®ÀïµÄiÔªËØ£¬ÔÙÕÒÒ»±éi×Ö·û£¬¼´°Ñi--;
+                // æ‰€æœ‰å­—ç¬¦ä¸²å†…æ‰¾åˆ°äº†ç›¸åŒçš„å­—ç¬¦ï¼Œåˆ™åŠ å…¥åˆ°anså®¹å™¨
+                // åˆ é™¤æ‰€æœ‰å­—ç¬¦ä¸²é‡Œçš„iå…ƒç´ ï¼Œå†æ‰¾ä¸€éiå­—ç¬¦ï¼Œå³æŠŠi--;
                 string s(1, i);
                 ans.push_back(s);
-                // É¾³ıËùÓĞ×Ö·û´®ÀïµÄi
+                // åˆ é™¤æ‰€æœ‰å­—ç¬¦ä¸²é‡Œçš„i
                 for (int j = 0; j < sz; j++) {
-                    auto pos = words[j].find(i); // ±Ø¶¨ÄÜÕÒµ½
+                    auto pos = words[j].find(i); // å¿…å®šèƒ½æ‰¾åˆ°
                     words[j].erase(words[j].begin() + pos, words[j].begin() + pos + 1);
                 }
                 i--;
