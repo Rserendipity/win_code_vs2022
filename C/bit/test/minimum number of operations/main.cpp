@@ -50,7 +50,6 @@ int findMin(string& s) {
 
         index++;
 
-
         reverse(s, index);
         count++;
     }
@@ -61,8 +60,10 @@ int main()
 {
     string input;
     int num = 0;
+    int sz = 0;
     cin >> num;
     while (num--) {
+        cin >> sz;
         cin >> input;
         cout << findMin(input) << endl;
         input.clear();
