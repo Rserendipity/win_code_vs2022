@@ -1,6 +1,6 @@
 #include "SeqList.h"
 
-void CheckCapacity(SL* ps)
+static void CheckCapacity(SL *ps)
 {
 	if (ps->capacity == ps->size)
 	{
@@ -40,14 +40,69 @@ void SLPushBack(SL* ps, SeqListType data)
 
 void SLPopBack(SL* ps)
 {
-	if (ps->size > 0)
+	assert(ps->size != 0);
+
+	ps->size--;
+}
+
+void SLPushFront(SL *ps, SeqListType data)
+{
+	CheckCapacity(ps);
+	for (int i = ps->size; i > 0; i--)
 	{
-		ps->size--;
+		ps->array[i] = ps->array[i - 1];
 	}
-	else
+	ps->array[0] = data;
+	ps->size++;
+}
+
+void SLPopFront(SL *ps)
+{
+	assert(ps->size != 0);
+
+	for (int i = 0; i < ps->size - 1; i++)
 	{
-		perror("Pop:");
+		ps->array[i] = ps->array[i + 1];
 	}
+	ps->size--;
+}
+
+void SLInsert(SL *ps, SeqListType data, int pos)
+{
+	assert(pos >= 0 && pos <= ps->size);
+	CheckCapacity(ps);
+
+	for (int i = ps->size; i > pos; i--)
+	{
+		ps->array[i] = ps->array[i - 1];
+	}
+	ps->array[pos] = data;
+	ps->size++;
+}
+
+void SLErase(SL *ps, int pos)
+{
+	assert(pos >= 0 && pos <= ps->size - 1);
+
+	for (int i = pos; i < ps->size - 1; i++)
+	{
+		ps->array[i] = ps->array[i + 1];
+	}
+	ps->size--;
+}
+
+int SLFind(SL *ps, SeqListType data)
+{
+	assert(ps->size);
+
+	for (int i = 0; i < ps->size; i++)
+	{
+		if (ps->array[i] == data)
+		{
+			return i;
+		}
+	}
+	return -1;
 }
 
 void SLPrint(SL* ps)
