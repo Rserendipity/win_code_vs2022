@@ -63,6 +63,19 @@ void SListPopFront(Node** pps)
 	*pps = temp;
 }
 
+Node* SListFind(Node* ps, SLType val)
+{
+	while (ps != NULL)
+	{
+		if (ps->data == val)
+		{
+			return ps;
+		}
+		ps = ps->next;
+	}
+	return NULL;
+}
+
 void SListInsert(Node** pps, SLType val, int pos)
 {
 	assert(pos >= 0);
@@ -83,6 +96,21 @@ void SListInsert(Node** pps, SLType val, int pos)
 	Node* newNode = GetNode(val);
 	newNode->next = temp->next;
 	temp->next = newNode;
+}
+
+void SListInsertByFind(Node** pps, SLType val, Node* pos)
+{
+	if (*pps == pos)
+	{
+		SListPushFront(pps, val);
+	}
+	Node* pre = *pps;
+	while (pre->next != pos)
+	{
+		pre = pre->next;
+	}
+	pre->next = GetNode(val);
+	pre->next->next = pos;
 }
 
 void SListErase(Node** pps, int pos)
@@ -106,14 +134,14 @@ void SListErase(Node** pps, int pos)
 	free(popNode);
 }
 
-void SListDistory(Node* ps)
+void SListDistory(Node** pps)
 {
 	Node* temp = NULL;
-	while (ps != NULL)
+	while (*pps != NULL)
 	{
-		temp = ps->next;
-		free(ps);
-		ps = temp;
+		temp = (*pps)->next;
+		free(*pps);
+		*pps = temp;
 	}
 }
 
