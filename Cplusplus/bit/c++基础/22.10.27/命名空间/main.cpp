@@ -4,6 +4,9 @@ using namespace std;
 
 int main()
 {
+    int x = 10;
+    const auto y = x;
 
+    cout << typeid(y).name() << endl;
     return 0;
 }
