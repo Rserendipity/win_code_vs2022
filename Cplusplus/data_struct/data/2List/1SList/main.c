@@ -13,7 +13,7 @@ void test1()
     SListPushFront(&list, 20);
 
     SListPrint(list);
-    SListDistory(list);
+    SListDistory(&list);
 }
 
 void test2()
@@ -33,7 +33,7 @@ void test2()
     SListPopBack(&list);
 
     SListPrint(list);
-    SListDistory(list);
+    SListDistory(&list);
 }
 
 void test3()
@@ -61,7 +61,7 @@ void test3()
     SListPopFront(&list);
 
     SListPrint(list);
-    SListDistory(list);
+    SListDistory(&list);
 }
 
 void test4()
@@ -76,7 +76,7 @@ void test4()
 
 
     SListPrint(list);
-    SListDistory(list);
+    SListDistory(&list);
 }
 
 void test5()

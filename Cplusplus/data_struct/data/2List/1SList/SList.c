@@ -6,6 +6,7 @@ static Node* GetNode(SLType val)
 	Node* ps = (Node*)malloc(sizeof(Node));
 	ps->data = val;
 	ps->next = NULL;
+	return ps;
 }
 
 void SListPushBack(Node** pps, SLType val)
