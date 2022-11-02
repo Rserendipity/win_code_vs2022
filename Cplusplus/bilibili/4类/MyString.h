@@ -54,12 +54,12 @@ public:
 
 		return *this;
 	}
-	char operator[] (int pos)
+	char& operator[] (int pos) // 返回引用才可以作为左值被修改
 	{
 		if (pos > this->len || pos < 0)
 		{
 			std::cout << "超出索引范围" << std::endl;
-			return -1;
+			return *(this->s + pos);
 		}
 		return *(this->s + pos);
 	}
