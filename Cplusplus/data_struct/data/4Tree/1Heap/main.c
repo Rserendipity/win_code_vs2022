@@ -27,7 +27,6 @@ void test1()
     HeapDestroy(&heap);
 }
 
-
 void test2()
 {
     int arr[] = { 10,2345,352,35,67,2,456 };
@@ -48,10 +47,69 @@ void test2()
     }
 }
 
+void PrintTopK(int* arr, int size, int k)
+{
+    Hp h;
+    HeapInit(&h);
+    for (int i = 0; i < k; i++)
+    {
+        HeapPush(&h, arr[i]);
+    }
+    for (int i = k; i < size; i++)
+    {
+        if (arr[i] > HeapTop(&h))
+        {
+            HeapPop(&h);
+            HeapPush(&h, arr[i]);
+        }
+    }
+
+    HeapPirnt(&h);
+    HeapDestroy(&h);
+}
+
+void test3()
+{
+    Hp h;
+    HeapInit(&h);
+ 
+    for (int i = 0; i < 10; i++)
+    {
+        HeapPush(&h, rand() % 100);
+    }
+    HeapPirnt(&h);
+    
+    HeapDestroy(&h);
+}
+
+void TopK()
+{
+    int n = 10000;
+    int* a = (int*)malloc(sizeof(int) * n);
+    srand(time(0));
+    for (size_t i = 0; i < n; ++i)
+    {
+        a[i] = rand() % 1000000;
+    }
+    a[5] = 1000000 + 1;
+    a[1231] = 1000000 + 2;
+    a[531] = 1000000 + 3;
+    a[5121] = 1000000 + 4;
+    a[115] = 1000000 + 5;
+    a[2335] = 1000000 + 6;
+    a[9999] = 1000000 + 7;
+    a[76] = 1000000 + 8;
+    a[423] = 1000000 + 9;
+    a[3144] = 1000000 + 10;
+    PrintTopK(a, n, 11);
+}
+
 int main()
 {
     // test1();
-    test2();
+    // test2();
+    TopK();
+    // test3();
 
     return 0;
 }

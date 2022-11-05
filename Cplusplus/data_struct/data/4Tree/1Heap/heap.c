@@ -28,7 +28,7 @@ void CheckHeapUp(HeapDataType* arr, int pos)
 	int parent = (pos - 1) / 2;
 	while (pos > 0)
 	{
-		if (arr[parent] < arr[pos])
+		if (arr[parent] > arr[pos])
 		{
 			swap(&arr[parent], &arr[pos]);
 			pos = parent;
@@ -48,12 +48,12 @@ void CheckHeapDown(HeapDataType* arr, int pos, int size)
 	while (child < size) 
 	{
 		// 左右孩子中的较大的那一个
-		if (child + 1 < size && arr[child + 1] > arr[child])
+		if (child + 1 < size && arr[child + 1] < arr[child])
 		{
 			child++;
 		}
 		// 交换孩子和父亲
-		if (arr[child] > arr[pos])
+		if (arr[child] < arr[pos])
 		{
 			swap(&arr[child], &arr[pos]);
 			pos = child;
@@ -117,4 +117,12 @@ void HeapPirnt(Hp* ps)
 bool HeapEmpty(Hp* ps)
 {
 	return ps->size == 0;
+}
+
+HeapDataType HeapTop(Hp* ps)
+{
+	assert(ps);
+	assert(!HeapEmpty(ps));
+
+	return ps->array[0];
 }
