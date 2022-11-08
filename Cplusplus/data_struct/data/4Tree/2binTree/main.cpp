@@ -59,7 +59,6 @@ void lastOrder(TreeNode* tree)
     }
 }
 
-
 void test1()
 {
     TreeNode* tree = GetBinTree();
@@ -70,8 +69,6 @@ void test1()
     lastOrder(tree);
     cout << endl;
 }
-
-
 
 int BinTreeSize(TreeNode* root)
 {
@@ -143,10 +140,68 @@ void test2()
         cout << find->data << endl;
 }
 
+void test3()
+{
+    queue<TreeNode*> q;
+    TreeNode* tree = GetBinTree();
+
+    q.push(tree);
+
+    while (!q.empty())
+    {
+        TreeNode* node = q.front();
+        q.pop();
+        cout << node->data << " ";
+        if (node->left)
+        {
+            q.push(node->left);
+        }
+        if (node->right)
+        {
+            q.push(node->right);
+        }
+    }
+    cout << endl;
+}
+
+bool BinTreeComplite(TreeNode* root)
+{
+    if (root == nullptr)
+        return true;
+
+    queue<TreeNode*> q;
+    q.push(root);
+
+    // 对头元素非空，把自己弹掉，左右孩子入队列
+    while (q.front() != nullptr)
+    {
+        TreeNode* node = q.front();
+        q.pop();
+        q.push(node->left);
+        q.push(node->right);
+    }
+
+    // 出队列的时候有非空的，则为 false
+    while (!q.empty())
+    {
+        if (q.front() != nullptr)
+            return false;
+        q.pop();
+    }
+    return true;
+}
+
+void test4()
+{
+    TreeNode* tree = GetBinTree();
+    cout << BinTreeComplite(tree) << endl;
+}
+
 int main()
 {
     // test1();
-    test2();
-
+    // test2();
+    // test3();
+    test4();
     return 0;
 }
