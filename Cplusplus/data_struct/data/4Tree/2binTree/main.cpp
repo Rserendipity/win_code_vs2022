@@ -109,6 +109,17 @@ int BinTreeDepth(TreeNode* tree)
     return max(BinTreeDepth(tree->left), BinTreeDepth(tree->right)) + 1;
 }
 
+int BinTreeMinDepth(TreeNode* tree)
+{
+    if (tree == nullptr)
+        return 0;
+    if (tree->left == nullptr || tree->right == nullptr)
+        return 1;
+
+    return min(BinTreeMinDepth(tree->left), BinTreeMinDepth(tree->right)) + 1;
+}
+
+
 TreeNode* BinTreeSearch(TreeNode* root, char val)
 {
     if (root == nullptr)
@@ -197,11 +208,25 @@ void test4()
     cout << BinTreeComplite(tree) << endl;
 }
 
+void test5()
+{
+    TreeNode* tree = GetBinTree();
+    int depth = BinTreeDepth(tree);
+    int mindepth = BinTreeMinDepth(tree);
+    preOrder(tree);
+    cout << endl;
+    inOrder(tree);
+    cout << endl;
+
+    cout << depth - mindepth << endl;
+}
+
 int main()
 {
     // test1();
     // test2();
     // test3();
-    test4();
+    // test4();
+    test5();
     return 0;
 }
