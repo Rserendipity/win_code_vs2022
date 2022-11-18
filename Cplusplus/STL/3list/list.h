@@ -1,4 +1,5 @@
 #pragma once
+#include "reverse_iterator.h"
 #include <iostream>
 #include <assert.h>
 using std::cout;
@@ -26,6 +27,11 @@ namespace cjj
 			return _node->val;
 		}
 
+		Ptr operator->()
+		{
+			return &operator*();
+		}
+
 		self& operator++()
 		{
 			_node = _node->next;
@@ -49,11 +55,11 @@ namespace cjj
 			return tmp;
 		}
 
-		bool operator!=(const self& it)
+		bool operator!=(const self& it) const
 		{
 			return _node != it._node;
 		}
-		bool operator==(const self& it)
+		bool operator==(const self& it) const
 		{
 			return _node == it._node;
 		}
@@ -68,6 +74,9 @@ namespace cjj
 	public:
 		typedef __list_iterator<T, T&, T*> iterator;
 		typedef __list_iterator<T, const T&, const T*> const_iterator;
+
+		typedef __reverse_iterator<iterator, T&, T*> reverse_iterator;
+		typedef __reverse_iterator<const_iterator, const T&, const T*> const_reverse_iterator;
 
 		iterator begin()
 		{
@@ -87,6 +96,26 @@ namespace cjj
 		const_iterator end() const
 		{
 			return const_iterator(_head);
+		}
+
+		reverse_iterator rbegin()
+		{
+			return reverse_iterator(end());
+		}
+
+		reverse_iterator rend()
+		{
+			return reverse_iterator(begin());
+		}
+
+		const_reverse_iterator rbegin() const
+		{
+			return const_reverse_iterator(end());
+		}
+
+		const_reverse_iterator rend() const
+		{
+			return const_reverse_iterator(begin());
 		}
 
 		list()
@@ -158,10 +187,12 @@ namespace cjj
 		{
 			erase(--end());
 		}
+
 		void pop_front()
 		{
 			erase(begin());
 		}
+
 		iterator insert(const iterator pos, const T& val)
 		{
 			node_type* tmp = pos._node;
@@ -284,4 +315,40 @@ namespace cjj
 			cout << n << " ";
 		}
 	}
+
+	void test5()
+	{
+		ListNode<int> n(10);
+		list<ListNode<int>> l1;
+		l1.push_back(n);
+		l1.push_back(n);
+		l1.push_back(n);
+		l1.push_back(n);
+
+		auto it = l1.begin();
+		while (it != l1.end())
+		{
+			cout << it->val << endl;
+			++it;
+		}
+
+	}
+	
+	void test6()
+	{
+		list<int> l1;
+		l1.push_back(10);
+		l1.push_back(20);
+		l1.push_back(30);
+		l1.push_back(40);
+		list<int>::reverse_iterator it = l1.rbegin();
+		
+		while (it != l1.rend())
+		{
+			cout << *it << " ";
+			++it;
+		}
+
+	}
+
 }
