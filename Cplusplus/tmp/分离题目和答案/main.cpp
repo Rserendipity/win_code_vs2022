@@ -35,7 +35,5 @@ int main()
         ch.clear();
         tmp.clear();
     }
-
-
     return 0;
 }
