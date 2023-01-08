@@ -20,9 +20,9 @@ Windows -- Visual Studio 2022
 
 # What's the content?
 
-Small program -- memorizing words, gobang, etc
-Content of data structures -- linear lists, linked lists, trees, graphs (unfinished)
-The content of the algorithm -- sorting
-Implementation of STL library -- string, vector, list, map (unfinished)
-Usually brush problem (leetcode based) code
-All kinds of learning code
+1. Small program -- memorizing words, gobang, etc
+2. Content of data structures -- linear lists, linked lists, trees, graphs (unfinished)
+3. The content of the algorithm -- sorting
+4. Implementation of STL library -- string, vector, list, map (unfinished)
+5. Usually brush problem (leetcode based) code
+6. All kinds of learning code
