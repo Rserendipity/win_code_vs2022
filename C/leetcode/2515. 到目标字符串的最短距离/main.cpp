@@ -23,7 +23,6 @@ public:
         if (start == left) {
             return -1;
         }
-
         while (right != start && lcnt < n) {
             if (right >= n) {
                 right = 0;
