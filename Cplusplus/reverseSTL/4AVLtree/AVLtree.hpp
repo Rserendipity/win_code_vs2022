@@ -74,8 +74,12 @@ namespace cjj {
                         RotateL(parent);
                     } else if (parent->_bf == -2 && cur->_bf == -1) {
                         RotateR(parent);
+                    } else if (parent->_bf == 2 && cur->_bf == -1) {
+                        RotateRL(parent);
+                    } else if (parent->_bf == -2 && cur->_bf == 1) {
+                        RotateLR(parent);
                     } else {
-
+                        assert("this tree was not AVL tree");
                     }
                     break;
                 } else {
@@ -89,10 +93,12 @@ namespace cjj {
 
         void inOrder() const noexcept {
             _inOrder(_root);
+            cout << endl;
         }
 
         void preOrder() const noexcept {
             _preOrder(_root);
+            cout << endl;
         }
 
     private:
@@ -100,14 +106,14 @@ namespace cjj {
             if (head == nullptr)
                 return;
             _inOrder(head->_left);
-            cout << head->_kv.first << ":" << head->_kv.second << endl;
+            cout << head->_kv.first << " ";
             _inOrder(head->_right);
         }
 
         void _preOrder(Node *head) const noexcept {
             if (head == nullptr)
                 return;
-            cout << head->_kv.first << ":" << head->_kv.second << endl;
+            cout << head->_kv.first << " ";
             _preOrder(head->_left);
             _preOrder(head->_right);
         }
@@ -169,6 +175,49 @@ namespace cjj {
             parent->_bf = childL->_bf = 0;
         }
 
+        void RotateRL(Node* parent) {
+            Node* childR = parent->_right;
+            Node* childRL = childR->_left;
+            int bf = childRL->_bf;
+
+            RotateR(parent->_right);
+            RotateL(parent);
+
+            childRL->_bf = 0;
+            if (bf == 1) {
+                parent->_bf = -1;
+                childR->_bf = 0;
+            } else if (bf == -1) {
+                parent->_bf = 0;
+                childR->_bf = 1;
+            } else if (bf == 0) {
+                parent->_bf = childR->_bf = 0;
+            } else {
+                assert("this tree was not AVL tree");
+            }
+        }
+
+        void RotateLR(Node* parent) {
+            Node* childL = parent->_left;
+            Node* childLR = childL->_right;
+            int bf = childLR->_bf;
+
+            RotateL(parent->_left);
+            RotateR(parent);
+
+            childLR->_bf = 0;
+            if (bf == 1) {
+                parent->_bf = 0;
+                childL->_bf = -1;
+            } else if (bf == -1) {
+                parent->_bf = 1;
+                childL->_bf = 0;
+            } else if (bf == 0) {
+                parent->_bf = childL->_bf = 0;
+            } else {
+                assert("this tree was not AVL tree");
+            }
+        }
     private:
         Node *_root = nullptr;
     };
@@ -182,7 +231,6 @@ namespace cjj {
         cout << tree.insert(std::make_pair(40, 10)) << endl;
         tree.inOrder();
     }
-
 
     void test2() {
         AVLTree<int, int> tree;
@@ -212,5 +260,49 @@ namespace cjj {
         tree.preOrder();
         cout << endl;
         tree.inOrder();
+    }
+
+    void test4() {
+        // 16, 3, 7, 11, 9, 26, 18, 14, 15
+        AVLTree<int, int> tree;
+        tree.insert(std::make_pair(16,0));
+        tree.insert(std::make_pair(3,0));
+        tree.insert(std::make_pair(7,0));
+
+        tree.preOrder();
+        tree.inOrder();
+
+        tree.insert(std::make_pair(11,0));
+        tree.insert(std::make_pair(9,0));
+        tree.insert(std::make_pair(26,0));
+
+        tree.preOrder();
+        tree.inOrder();
+
+        tree.insert(std::make_pair(18,0));
+        tree.insert(std::make_pair(14,0));
+        tree.insert(std::make_pair(15,0));
+
+        tree.preOrder();
+        tree.inOrder();
+    }
+
+    void test5() {
+        // 4, 2, 6, 1, 3, 5, 15, 7, 16, 14
+        AVLTree<int,int> tree;
+        tree.insert(std::make_pair(4, 0));
+        tree.insert(std::make_pair(2, 0));
+        tree.insert(std::make_pair(6, 0));
+        tree.insert(std::make_pair(1, 0));
+        tree.insert(std::make_pair(3, 0));
+        tree.insert(std::make_pair(5, 0));
+        tree.insert(std::make_pair(15, 0));
+        tree.insert(std::make_pair(7, 0));
+        tree.insert(std::make_pair(16, 0));
+        tree.insert(std::make_pair(14, 0));
+
+        tree.preOrder();
+        tree.inOrder();
+
     }
 }
