@@ -101,7 +101,38 @@ namespace cjj {
             cout << endl;
         }
 
+        bool isBalance() {
+            return _isBalance(_root);
+        };
+
     private:
+
+        int high(Node *root) {
+            if (root == nullptr) {
+                return 0;
+            } else {
+                return std::max(high(root->_left), high(root->_right)) + 1;
+            }
+        }
+
+        bool _isBalance(Node *root) {
+            if (root == nullptr) {
+                return true;
+            }
+
+            int leftHigh = high(root->_left);
+            int rightHigh = high(root->_right);
+
+            if (rightHigh - leftHigh != root->_bf) {
+                cout << "节点" << root->_kv.first << "平衡因子异常" << endl;
+                return false;
+            }
+
+            return abs(leftHigh - rightHigh) < 2
+                   && _isBalance(root->_left)
+                   && _isBalance(root->_right);
+        }
+
         void _inOrder(Node *head) const noexcept {
             if (head == nullptr)
                 return;
@@ -175,9 +206,9 @@ namespace cjj {
             parent->_bf = childL->_bf = 0;
         }
 
-        void RotateRL(Node* parent) {
-            Node* childR = parent->_right;
-            Node* childRL = childR->_left;
+        void RotateRL(Node *parent) {
+            Node *childR = parent->_right;
+            Node *childRL = childR->_left;
             int bf = childRL->_bf;
 
             RotateR(parent->_right);
@@ -197,9 +228,9 @@ namespace cjj {
             }
         }
 
-        void RotateLR(Node* parent) {
-            Node* childL = parent->_left;
-            Node* childLR = childL->_right;
+        void RotateLR(Node *parent) {
+            Node *childL = parent->_left;
+            Node *childLR = childL->_right;
             int bf = childLR->_bf;
 
             RotateL(parent->_left);
@@ -218,6 +249,7 @@ namespace cjj {
                 assert("this tree was not AVL tree");
             }
         }
+
     private:
         Node *_root = nullptr;
     };
@@ -265,23 +297,23 @@ namespace cjj {
     void test4() {
         // 16, 3, 7, 11, 9, 26, 18, 14, 15
         AVLTree<int, int> tree;
-        tree.insert(std::make_pair(16,0));
-        tree.insert(std::make_pair(3,0));
-        tree.insert(std::make_pair(7,0));
+        tree.insert(std::make_pair(16, 0));
+        tree.insert(std::make_pair(3, 0));
+        tree.insert(std::make_pair(7, 0));
 
         tree.preOrder();
         tree.inOrder();
 
-        tree.insert(std::make_pair(11,0));
-        tree.insert(std::make_pair(9,0));
-        tree.insert(std::make_pair(26,0));
+        tree.insert(std::make_pair(11, 0));
+        tree.insert(std::make_pair(9, 0));
+        tree.insert(std::make_pair(26, 0));
 
         tree.preOrder();
         tree.inOrder();
 
-        tree.insert(std::make_pair(18,0));
-        tree.insert(std::make_pair(14,0));
-        tree.insert(std::make_pair(15,0));
+        tree.insert(std::make_pair(18, 0));
+        tree.insert(std::make_pair(14, 0));
+        tree.insert(std::make_pair(15, 0));
 
         tree.preOrder();
         tree.inOrder();
@@ -289,7 +321,7 @@ namespace cjj {
 
     void test5() {
         // 4, 2, 6, 1, 3, 5, 15, 7, 16, 14
-        AVLTree<int,int> tree;
+        AVLTree<int, int> tree;
         tree.insert(std::make_pair(4, 0));
         tree.insert(std::make_pair(2, 0));
         tree.insert(std::make_pair(6, 0));
@@ -304,5 +336,18 @@ namespace cjj {
         tree.preOrder();
         tree.inOrder();
 
+        cout << tree.isBalance() << endl;
+
+    }
+
+    void test6() {
+        const int N = 100000;
+        AVLTree<int, int> tree;
+        srand(time(nullptr));
+        for (int i = 0; i < N; ++i) {
+            int n  = rand() % 100000;
+            tree.insert(std::make_pair(n, n));
+        }
+        cout << tree.isBalance() << endl;
     }
 }
