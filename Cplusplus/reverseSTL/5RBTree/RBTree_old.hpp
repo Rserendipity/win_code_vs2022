@@ -4,7 +4,7 @@
 #include <cassert>
 #include <random>
 
-namespace cjj_stl {
+namespace cjj {
     using std::cout;
     using std::endl;
 
@@ -13,138 +13,49 @@ namespace cjj_stl {
         RED
     };
 
-    template<class T>
+    template<class K, class V>
     struct RBTreeNode {
-        RBTreeNode<T> *_left;
-        RBTreeNode<T> *_right;
-        RBTreeNode<T> *_parent;
+        RBTreeNode<K, V> *_left;
+        RBTreeNode<K, V> *_right;
+        RBTreeNode<K, V> *_parent;
 
-        T _val;
+        std::pair<K, V> _kv;
         Color _color;
 
-        explicit RBTreeNode(const T &val)
-                : _val(val), _left(nullptr), _right(nullptr), _parent(nullptr), _color(RED) {}
+        explicit RBTreeNode(const std::pair<K, V> &kv)
+                : _kv(kv), _left(nullptr), _right(nullptr), _parent(nullptr), _color(RED) {}
     };
 
-    template<class T, class Ref, class Ptr>
-    class RBTreeIterator {
+    template<class K, class V>
+    class RBTree_old {
     private:
-        using Node = RBTreeNode<T>;
-        using self = RBTreeIterator<T, Ref, Ptr>;
+        using Node = RBTreeNode<K, V>;
     public:
-        explicit RBTreeIterator(Node *node)
-                : _node(node) {}
+        RBTree_old() = default;
 
-        Ref operator*() {
-            return _node->_val;
-        }
-
-        Ptr operator->() {
-            return &_node->val;
-        }
-
-        bool operator!=(const self &it) {
-            return it._node != _node;
-        }
-
-        self &operator++() {
-            if (_node->_right) {
-                // 1、右不为空，下一个就是右子树的最左节点
-                Node *subLeft = _node->_right;
-                while (subLeft->_left) {
-                    subLeft = subLeft->_left;
-                }
-
-                _node = subLeft;
-            } else {
-                // 2、右为空，沿着到根的路径，找孩子是父亲左的那个祖先
-                Node *cur = _node;
-                Node *parent = cur->_parent;
-                while (parent && cur == parent->_right) {
-                    cur = parent;
-                    parent = parent->_parent;
-                }
-
-                _node = parent;
-            }
-
-            return *this;
-        }
-
-        self &operator--() {
-            if (_node->_left) {
-                // 1、左不为空，找左子树最右节点
-                Node *subRight = _node->_left;
-                while (subRight->_right) {
-                    subRight = subRight->_right;
-                }
-
-                _node = subRight;
-            } else {
-                // 2、左为空，孩子是父亲的右的那个祖先
-                Node *cur = _node;
-                Node *parent = cur->_parent;
-                while (parent && cur == parent->_left) {
-                    cur = parent;
-                    parent = parent->_parent;
-                }
-
-                _node = parent;
-            }
-
-            return *this;
-        }
-
-    private:
-        Node *_node;
-    };
-
-
-    template<class K, class V, class KeyOfT>
-    class RBTree {
-    private:
-        using Node = RBTreeNode<V>;
-    public:
-        using iterator = RBTreeIterator<V, V &, V *>;
-
-        iterator begin() {
-            Node *cur = _root;
-            while (cur && cur->_left) {
-				cur = cur->_left;
-            }
-            return iterator(cur);
-        }
-
-        iterator end() {
-            return iterator(nullptr);
-        }
-
-        RBTree() = default;
-
-        bool insert(const V &val) {
+        bool insert(const std::pair<K, V> &kv) {
             if (_root == nullptr) {
-                _root = new Node(val);
+                _root = new Node(kv);
                 _root->_color = BLACK;
                 return true;
             }
 
-            KeyOfT kof;
             Node *parent = nullptr;
             Node *cur = _root;
             while (cur) {
-                if (kof(cur->_val) < kof(val)) {
+                if (cur->_kv.first < kv.first) {
                     parent = cur;
                     cur = cur->_right;
-                } else if (kof(cur->_val) > kof(val)) {
+                } else if (cur->_kv.first > kv.first) {
                     parent = cur;
                     cur = cur->_left;
                 } else {
                     return false;
                 }
-			}
+            }
 
-            cur = new Node(val);
-            if (kof(parent->_val) > kof(val)) {
+            cur = new Node(kv);
+            if (parent->_kv.first > kv.first) {
                 parent->_left = cur;
             } else {
                 parent->_right = cur;
@@ -228,7 +139,74 @@ namespace cjj_stl {
             return true;
         }
 
+        void inOrder() const noexcept {
+            _inOrder(_root);
+            cout << endl;
+        }
+
+        void preOrder() const noexcept {
+            _preOrder(_root);
+            cout << endl;
+        }
+
+        bool isRBTree() const noexcept {
+            Node *cur = _root;
+            int blackNum = 0;
+            while (cur) {
+                if (cur->_color == BLACK) {
+                    blackNum++;
+                }
+                cur = cur->_left;
+            }
+            return _isRBTree(_root, 0, blackNum);
+        }
+
     private:
+        bool _isRBTree(Node *root, int pathNum, int blackNum) const noexcept {
+            if (root == nullptr) {
+                if (pathNum != blackNum) {
+                    cout << "有路径的黑色节点数量不等" << endl;
+                    return false;
+                }
+                return true;
+            }
+
+            if (root->_color == RED && root->_parent->_color == RED) {
+                cout << "有连续的红节点" << endl;
+                return false;
+            }
+
+            if (root->_color == BLACK) {
+                pathNum++;
+            }
+
+            return _isRBTree(root->_left, pathNum, blackNum) && _isRBTree(root->_right, pathNum, blackNum);
+        }
+
+        int high(Node *root) const noexcept {
+            if (root == nullptr) {
+                return 0;
+            } else {
+                return std::max(high(root->_left), high(root->_right)) + 1;
+            }
+        }
+
+        void _inOrder(Node *head) const noexcept {
+            if (head == nullptr)
+                return;
+            _inOrder(head->_left);
+            cout << head->_kv.first << " ";
+            _inOrder(head->_right);
+        }
+
+        void _preOrder(Node *head) const noexcept {
+            if (head == nullptr)
+                return;
+            cout << head->_kv.first << " ";
+            _preOrder(head->_left);
+            _preOrder(head->_right);
+        }
+
         void RotateL(Node *parent) {
             Node *childR = parent->_right;
             Node *childRL = childR->_left;
@@ -287,5 +265,32 @@ namespace cjj_stl {
         Node *_root = nullptr;
     };
 
+
+    void test1() {
+        RBTree_old<int, int> tree;
+        tree.insert(std::make_pair(10, 0));
+        tree.insert(std::make_pair(20, 0));
+        tree.insert(std::make_pair(30, 0));
+        tree.insert(std::make_pair(40, 0));
+        tree.insert(std::make_pair(50, 0));
+        tree.insert(std::make_pair(60, 0));
+        tree.insert(std::make_pair(70, 0));
+
+        tree.preOrder();
+        tree.inOrder();
+    }
+
+    void test2() {
+        RBTree_old<int, int> tree;
+
+        const int N = 100000;
+        srand(time(nullptr));
+        for (int i = 0; i < N; i++) {
+            int x = rand();
+            tree.insert(std::make_pair(x, x));
+        }
+
+        cout << tree.isRBTree() << endl;
+    }
 
 }

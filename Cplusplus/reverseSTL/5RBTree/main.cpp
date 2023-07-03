@@ -1,7 +1,7 @@
-#include "RBTree.hpp"
+#include "Map.hpp"
+using namespace std;
 
 int main() {
-    // cjj::test1();
-    cjj::test2();
+    cjj_stl::testMap1();
     return 0;
 }
