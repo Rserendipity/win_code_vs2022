@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <cassert>
+#include <random>
 
 namespace cjj {
     using std::cout;
@@ -148,8 +149,41 @@ namespace cjj {
             cout << endl;
         }
 
+        bool isRBTree() const noexcept {
+            Node *cur = _root;
+            int blackNum = 0;
+            while (cur) {
+                if (cur->_color == BLACK) {
+                    blackNum++;
+                }
+                cur = cur->_left;
+            }
+            return _isRBTree(_root, 0, blackNum);
+        }
+
     private:
-        int high(Node *root) {
+        bool _isRBTree(Node *root, int pathNum, int blackNum) const noexcept {
+            if (root == nullptr) {
+                if (pathNum != blackNum) {
+                    cout << "有路径的黑色节点数量不等" << endl;
+                    return false;
+                }
+                return true;
+            }
+
+            if (root->_color == RED && root->_parent->_color == RED) {
+                cout << "有连续的红节点" << endl;
+                return false;
+            }
+
+            if (root->_color == BLACK) {
+                pathNum++;
+            }
+
+            return _isRBTree(root->_left, pathNum, blackNum) && _isRBTree(root->_right, pathNum, blackNum);
+        }
+
+        int high(Node *root) const noexcept {
             if (root == nullptr) {
                 return 0;
             } else {
@@ -244,6 +278,19 @@ namespace cjj {
 
         tree.preOrder();
         tree.inOrder();
+    }
+
+    void test2() {
+        RBTree<int, int> tree;
+
+        const int N = 100000;
+        srand(time(nullptr));
+        for (int i = 0; i < N; i++) {
+            int x = rand();
+            tree.insert(std::make_pair(x, x));
+        }
+
+        cout << tree.isRBTree() << endl;
     }
 
 }
