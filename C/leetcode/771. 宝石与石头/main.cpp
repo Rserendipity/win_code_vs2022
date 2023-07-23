@@ -1,19 +1,16 @@
 class Solution {
 public:
     int numJewelsInStones(string jewels, string stones) {
-        int up[26] = {0};
-        int low[26] = {0};
-        int ans = 0;
-        for (char ch : jewels) {
-            if (isupper(ch))
-                up[ch - 'A']++;
-            else
-                low[ch - 'a']++;
+        unordered_set<char> hash;
+        for (auto& ch : jewels) {
+            hash.insert(ch);
         }
-        for (char ch : stones) {
-            if (isupper(ch) && up[ch - 'A'] || islower(ch) && low[ch - 'a'])
-                ans++;
+        int cnt = 0;
+        for (auto& ch : stones) {
+            if (hash.count(ch) != 0) {
+                cnt ++;
+            }
         }
-        return ans;
+        return cnt;
     }
 };
