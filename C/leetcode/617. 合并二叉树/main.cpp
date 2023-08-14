@@ -1,36 +1,32 @@
-#define _CRT_SECURE_NO_WARNINGS 1
-#include <bits/stdc++.h>
-using namespace std;
-
-//Definition for a binary tree node.
-struct TreeNode {
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-    TreeNode() : val(0), left(nullptr), right(nullptr) {}
-    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-};
- 
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
 class Solution {
 public:
     TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2) {
-        if (root1 == nullptr && root2 == nullptr)
+        if (!root1 && !root2) {
             return nullptr;
-        if (root1 == nullptr && root2 != nullptr)
+        }
+        if (!root1) {
             return root2;
-        if (root1 != nullptr && root2 == nullptr)
+        }
+        if (!root2) {
             return root1;
+        }
 
-        TreeNode* newTree = root1;
-        newTree->val += root2->val;
-        newTree->left = mergeTrees(root1->left, root2->left);
-        newTree->right = mergeTrees(root1->right, root2->right);
-        return newTree;
+
+        TreeNode* root = root1;
+        root->val += root2->val;
+        root->left = mergeTrees(root1->left, root2->left);
+        root->right = mergeTrees(root1->right, root2->right);
+        return root;
     }
 };
-int main()
-{
-
-    return 0;
-}
