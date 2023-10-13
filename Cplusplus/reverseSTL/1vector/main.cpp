@@ -1,6 +1,6 @@
-#include <iostream>
+#include "./MyVector.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    MyVector::test01();
     return 0;
 }

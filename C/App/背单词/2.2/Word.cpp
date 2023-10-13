@@ -6,7 +6,7 @@ Word::Word()
 	char* temp = new char[MAX_WORD_SIZE];
 
 	// 每次temp分配的地址肯定不一样，直接用temp的地址作为随机种子
-	srand((unsigned int)temp);
+	srand((unsigned int)time(nullptr));
 
 	// 读取所有的中文含义
 	for (int i = 0; i < 4; i++)
