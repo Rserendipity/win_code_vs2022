@@ -1,0 +1,8 @@
+//
+// Created by 22490 on 2023/10/12.
+//
+
+#ifndef INC_1VECTOR_MYVECTOR_H
+#define INC_1VECTOR_MYVECTOR_H
+
+#endif //INC_1VECTOR_MYVECTOR_H
