@@ -1,0 +1,8 @@
+//
+// Created by 22490 on 2023/10/13.
+//
+
+#ifndef INC_3STACK_QUEUE_STACK_HPP
+#define INC_3STACK_QUEUE_STACK_HPP
+
+#endif //INC_3STACK_QUEUE_STACK_HPP
